@@ -1,0 +1,74 @@
+#include "stm32f4xx.h"
+#include "delay.h"
+#include "lcd_header.h"
+
+unsigned int A;
+ unsigned char s[] = { 
+  0x00,
+  0x00,
+  0x00,
+  0x15,
+  0x15,
+  0x1F,
+  0x00,
+  0x00
+};
+
+ unsigned char i[] = {
+  0x00,
+  0x00,
+  0x00,
+  0x02,
+  0x02,
+  0x1F,
+  0x00,
+  0x14	
+};
+
+ unsigned char n[] = {
+  0x00,
+  0x00,
+  0x08,
+  0x02,
+  0x02,
+  0x1F,
+  0x00,
+  0x00
+};
+
+ unsigned char a[] = {
+  0x04,
+  0x04,
+  0x04,
+  0x04,
+  0x04,
+  0x07,
+  0x00,
+  0x00
+};
+
+
+int main(void)
+{
+	RCC->AHB1ENR = 0x3ff;
+	lcd_init();
+	lcd_clear();
+	
+	//lcd_gotoxy(0,0);
+	//lcd_print("hamid");
+	lcd_define_char(a,0x00);
+	lcd_define_char(n,0x01);
+	lcd_define_char(i,0x02);
+	lcd_define_char(s,0x03);
+	lcd_gotoxy(0,6);
+	lcd_putchar(0x00);
+	lcd_putchar(0x01);
+	lcd_putchar(0x02);
+	lcd_putchar(0x03);
+	
+	
+	while(1)
+	{
+		
+	}
+}

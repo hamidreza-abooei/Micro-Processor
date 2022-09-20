@@ -1,0 +1,31 @@
+;
+; AssemblerApplication6.asm
+;
+; Created: 4/1/2022 11:09:14 PM
+; Author : Hamidreza
+;
+
+
+; Replace with your application code
+LDI	R16,0X00
+OUT DDRA,R16
+COM R16
+OUT PORTA,R16		;PULLUP
+OUT DDRC,R16
+COM R16
+OUT PORTC,R16
+LDI R17,0X0F
+LDI R18,0XF0
+
+start:
+    IN R16,PINA
+	MOV R19,R16
+	AND R19,R17
+	AND R16,R18
+	LSR R16
+	LSR R16
+	LSR R16
+	LSR R16
+	MUL R16,R19
+	OUT PORTC,R0
+    RJMP start

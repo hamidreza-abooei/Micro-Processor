@@ -1,0 +1,41 @@
+;
+; AssemblerApplication10.asm
+;
+; Created: 3/10/2022 8:56:37 PM
+; Author : Hamidreza
+;
+
+
+; Replace with your application code
+
+LDI R16,0B10111111
+OUT DDRA,R16
+COM R16
+OUT PORTA,R16
+LDI R16,0X00
+LDI R17,0XFF
+OUT DDRB,R16
+OUT PORTB,R17
+OUT DDRC,R16
+OUT PORTC,R17
+OUT DDRD,R17
+OUT PORTD,R16
+start:
+	IN R18,PINA
+	IN R19,PINB
+	IN R20,PINC
+	BST R18,6
+	BRTC FIRST
+	BRTS SECOND
+
+FIRST:
+	NEG R19
+	ADD R19,R20
+	OUT PORTD,R19
+	jmp start
+
+SECOND:
+	SUB R20,R19
+	OUT PORTD,R20
+    jmp start
+

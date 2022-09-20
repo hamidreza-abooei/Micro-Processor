@@ -1,0 +1,2 @@
+main DSTACK_USAGE:0 DSTACK_LEVEL:0 FILE:"three.c" LINE:41
+timer1_compa_isr DSTACK_USAGE:1 DSTACK_LEVEL:1 FILE:"three.c" LINE:32

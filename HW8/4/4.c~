@@ -1,0 +1,156 @@
+/*
+ * 4.c
+ *
+ * Created: 6/22/2022 1:30:21 AM
+ * Author: Hamidreza
+ */
+
+#include <mega32.h>
+#include <delay.h>
+#define ADC_INIT ((1<<REFS0) | (1<<ADLAR))
+unsigned char thigh,tlow ;
+float temp ;
+unsigned char adc_select = 0;
+
+
+void display (void){
+    thigh = (char) temp ;
+    tlow = ((char)(temp*10))%10;
+    PORTC = (thigh * 0x10) | (tlow);
+
+}
+    
+void ADC_run(void){
+    
+    ADCSRA|=(1<<ADSC);
+    while ((ADCSRA & (1<<ADIF))==0);
+    ADCSRA|=(1<<ADIF);
+    temp = ADCH;
+    temp = (temp * 5.0)/255.0;
+
+    
+    display(); 
+
+
+}
+
+void GET_KEY (void){
+    PORTD=0XFE;
+    if(PIND.4==0)
+            {
+            delay_ms(100);
+            if(PIND.4==0)
+                {
+                    while (PIND.4==0){}
+                    adc_select=1;  
+                }
+            }
+     if(PIND.5==0)
+            {
+            delay_ms(100);
+            if(PIND.5==0)
+                {
+                    while (PIND.5==0){}
+                    adc_select=4;  
+                }
+            }
+            
+     if(PIND.6==0)
+            {
+            delay_ms(100);
+            if(PIND.6==0)
+                {
+                    while (PIND.6==0){}
+                    adc_select=7;  
+                }
+            }
+
+   
+        
+      PORTD=0XFD;
+      if(PIND.4==0)
+            {
+            delay_ms(100);
+            if(PIND.4==0)
+                {
+                    while (PIND.4==0){}
+                    adc_select=2;  
+                }
+            }
+     if(PIND.5==0)
+            {
+            delay_ms(100);
+            if(PIND.5==0)
+                {
+                    while (PIND.5==0){}
+                    adc_select=5;  
+                }
+            }
+            
+     if(PIND.6==0)
+            {
+            delay_ms(100);
+            if(PIND.6==0)
+                {
+                    while (PIND.6==0){}
+                    adc_select=0;  
+                }
+            }
+        
+      PORTD=0XFB;
+      if(PIND.4==0)
+            {
+            delay_ms(100);
+            if(PIND.4==0)
+                {
+                    while (PIND.4==0){}
+                    adc_select=3;  
+                }
+            }
+     if(PIND.5==0)
+            {
+            delay_ms(100);
+            if(PIND.5==0)
+                {
+                    while (PIND.5==0){}
+                    adc_select=6;  
+                }
+            }
+            
+     if(PIND.6==0)
+            {
+            delay_ms(100);
+            if(PIND.6==0)
+                {
+                    while (PIND.6==0){}
+                    ADMUX =ADC_INIT | adc_select;
+                    delay_us(10);
+                    PORTD.7=~PORTD.7;
+                    ADC_run();  
+                }
+            }
+        
+
+
+}
+
+
+void main(void){
+    DDRA = 0;
+    DDRC = 0xFF;
+    DDRD = 0x0f;
+    PORTD = 0xF0;
+
+    ADMUX = ADC_INIT ;
+    ADCSRA = (1<<ADEN)| (0<<ADSC)| (0<<ADATE)| (0<<ADIE) | (1<<ADPS2) | (1<<ADPS1);
+    
+    
+    while (1){
+        if((PIND & 0x70) != 0x70){
+            GET_KEY();
+            PORTD.7=~PORTD.7;
+        }
+    
+    }
+}
+

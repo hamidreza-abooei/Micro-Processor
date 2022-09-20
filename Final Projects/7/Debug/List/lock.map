@@ -1,0 +1,32 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+temp                                                                              0x0260       4
+u_seed_rand_val                                                                   0x0264       2
+_seed                                                                             0x0266       4
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+key_pressed                                                                       R5           1
+pass                                                                              R6,R7        2
+password                                                                          R8,R9        2
+passtemp                                                                          R10,R11      2
+fail_counter                                                                      R4           1
+i                                                                                 R13          1
+alpha                                                                             R12          1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+timer0_ovf_isr                                                                    0x00070      6
+timer1_ovf_isr                                                                    0x00076     12
+send_number                                                                       0x00082    130
+GET_KEY                                                                           0x00104    110
+main                                                                              0x00179    128
+srand                                                                             0x001F9     10
+rand                                                                              0x00203     23

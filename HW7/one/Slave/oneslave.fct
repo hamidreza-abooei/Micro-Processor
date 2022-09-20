@@ -1,0 +1,2 @@
+main DSTACK_USAGE:0 DSTACK_LEVEL:0 FILE:"oneslave.c" LINE:17
+spi_isr DSTACK_USAGE:1 DSTACK_LEVEL:1 FILE:"oneslave.c" LINE:9

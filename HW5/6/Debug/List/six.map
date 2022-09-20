@@ -1,0 +1,23 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+pump_status                                                                       R5           1
+pump_ON_counter                                                                   R4           1
+pump_OFF_counter                                                                  R7           1
+start_flag                                                                        R6           1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+timer_interrupt                                                                   0x0005D     38
+start_pump                                                                        0x00083     17
+stop_pump                                                                         0x00094      6
+main                                                                              0x0009A     48

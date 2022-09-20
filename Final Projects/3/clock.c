@@ -1,0 +1,316 @@
+/*******************************************************
+This program was created by the
+CodeWizardAVR V3.12 Advanced
+Automatic Program Generator
+© Copyright 1998-2014 Pavel Haiduc, HP InfoTech s.r.l.
+http://www.hpinfotech.com
+
+Project : 
+Version : 
+Date    : 6/30/2022
+Author  : 
+Company : 
+Comments: 
+
+
+Chip type               : ATmega32
+Program type            : Application
+AVR Core Clock frequency: 8.000000 MHz
+Memory model            : Small
+External RAM size       : 0
+Data Stack size         : 512
+*******************************************************/
+
+#include <mega32.h>
+#include <delay.h>
+const unsigned char seven[] = {0x40, 0x79, 0x24, 0x30, 0x19, 0x12, 0x2, 0x78, 0x0, 0x10}; 
+// Declare your global variables here
+unsigned char tic = 0;
+unsigned char hour = 0;
+unsigned char min = 0;
+unsigned char sec = 0;
+unsigned char temp = 0;
+unsigned char start = 0,i,key_pressed;
+
+
+
+void display(unsigned char counts){     // lasts around 25ms
+    //PORTD = min;   
+    for (i = 0; i<counts;i++){
+        temp = hour / 10;
+        PORTB = 0x01;  
+        PORTA = seven[temp];
+        delay_ms(5);
+        temp = hour % 10;
+        PORTB = 0x02;
+        PORTA = seven[temp]; 
+        
+        PORTB.1 = 1;  
+        delay_ms(5);
+        temp = min / 10; 
+        PORTB = 0x04;
+        PORTA = seven[temp];  
+        
+        PORTB.2 = 1; 
+         
+        delay_ms(5);
+        temp = min % 10;
+        PORTB = 0x08;
+        PORTA = seven[temp]; 
+
+        delay_ms(5);
+        if(tic==0){
+            PORTB = 0x0F;
+            PORTA = 0x7F;
+              
+        }else{
+            PORTB = 0x0F; 
+            PORTA = 0xFF;    
+
+        }
+                  
+        delay_ms(5);
+    } 
+
+    
+    
+    
+    
+        
+
+}
+
+// Timer2 overflow interrupt service routine
+interrupt [TIM2_OVF] void timer2_ovf_isr(void)
+{
+    tic = ~tic;
+    if (tic==0)     // one sec
+    {
+        sec++;
+        if (sec == 60){
+           sec = 0;
+           min++;
+           if(min == 60){
+             min = 0;
+             hour++;
+             if (hour==24){
+                hour = 0;
+             }
+           }
+        }
+    }
+}
+
+void send_number(unsigned char number){
+    if (number == 10){
+        start=1;
+        // Timer/Counter 2 initialization
+        // Clock source: TOSC1 pin
+        // Clock value: PCK2/64
+        // Mode: Normal top=0xFF
+        // OC2 output: Disconnected
+        ASSR=1<<AS2;
+        TCCR2=(0<<PWM2) | (0<<COM21) | (0<<COM20) | (0<<CTC2) | (1<<CS22) | (0<<CS21) | (0<<CS20);
+        TCNT2=0x00;
+        OCR2=0x00;
+
+        // Timer(s)/Counter(s) Interrupt(s) initialization
+        TIMSK=(0<<OCIE2) | (1<<TOIE2) | (0<<TICIE1) | (0<<OCIE1A) | (0<<OCIE1B) | (0<<TOIE1) | (0<<OCIE0) | (0<<TOIE0);
+
+        // Global enable interrupts
+        #asm("sei")
+
+    
+    }else if(number == 11){
+    
+    
+    }else{
+        hour = hour % 10;
+        hour = hour * 10;
+        hour += min / 10;
+        min = min % 10;
+        min = min * 10;
+        min += number;
+    
+    
+    }
+
+}
+
+void GET_KEY (void){
+    key_pressed = 50;   //  
+    PORTC=0XFC;
+    if(PIND.0==0)
+            {
+            display(4);
+            if(PIND.0==0)
+                {
+                    //while (PINB.0==0){}
+                    key_pressed=1;  
+                }
+            }
+     if(PIND.1==0)
+            {
+            display(4);
+            if(PIND.1==0)
+                {
+                    //while (PINB.1==0){}
+                    key_pressed=4;  
+                }
+            }
+            
+     if(PIND.2==0)
+            {
+            display(4);
+            if(PIND.2==0)
+                {
+                    //while (PINB.2==0){}
+                    key_pressed=7;  
+                }
+            }  
+            
+     if(PIND.3==0)
+            {
+            display(4);
+            if(PIND.3==0)
+                {
+                    //while (PINB.3==0){}
+                    key_pressed=10;  //      *
+                }
+            }
+
+   
+        
+      PORTC=0XFA;
+      if(PIND.0==0)
+            {
+            display(4);
+            if(PIND.0==0)
+                {
+                    //while (PINB.0==0){}
+                    key_pressed=2;  
+                }
+            }
+     if(PIND.1==0)
+            {
+            display(4);
+            if(PIND.1==0)
+                {
+                    //while (PINB.1==0){}
+                    key_pressed=5;  
+                }
+            }
+            
+     if(PIND.2==0)
+            {
+            display(4);
+            if(PIND.2==0)
+                {
+                    //while (PINB.2==0){}
+                    key_pressed=8;  
+                }
+            }  
+            
+     if(PIND.3==0)
+            {
+            display(4);
+            if(PIND.3==0)
+                {
+                    //while (PINB.2==0){}
+                    key_pressed=0;     
+                }
+            }
+              
+      PORTC=0XF6;
+      if(PIND.0==0)
+            {
+            display(4);
+            if(PIND.0==0)
+                {
+                    //while (PINB.0==0){}
+                    key_pressed=3;  
+                }
+            }
+     if(PIND.1==0)
+            {
+            display(4);
+            if(PIND.1==0)
+                {
+                    //while (PINB.1==0){}
+                    key_pressed=6;  
+                }
+            }
+            
+     if(PIND.2==0)
+            {
+            display(4);
+            if(PIND.2==0)
+                {
+                    //while (PINB.2==0){}
+                    key_pressed=9;  
+                }
+            }  
+            
+     if(PIND.3==0)
+            {
+            display(4);
+            if(PIND.3==0)
+                {
+                   // while (PINB.3==0){}
+                    key_pressed=11;   //     #
+                }
+            } 
+       if(key_pressed!=50){     
+       send_number(key_pressed);  }   
+       PORTC=0XF0;  
+            
+            
+
+}
+
+
+
+
+void main(void)
+{
+// Declare your local variables here
+
+// Input/Output Ports initialization
+// Port A initialization
+// Function: Bit7=Out Bit6=Out Bit5=Out Bit4=Out Bit3=Out Bit2=Out Bit1=Out Bit0=Out 
+DDRA=(1<<DDA7) | (1<<DDA6) | (1<<DDA5) | (1<<DDA4) | (1<<DDA3) | (1<<DDA2) | (1<<DDA1) | (1<<DDA0);
+// State: Bit7=0 Bit6=0 Bit5=0 Bit4=0 Bit3=0 Bit2=0 Bit1=0 Bit0=0 
+PORTA=(0<<PORTA7) | (0<<PORTA6) | (0<<PORTA5) | (0<<PORTA4) | (0<<PORTA3) | (0<<PORTA2) | (0<<PORTA1) | (0<<PORTA0);
+
+// Port B initialization
+// Function: Bit7=In Bit6=In Bit5=In Bit4=In Bit3=Out Bit2=Out Bit1=Out Bit0=Out 
+DDRB=(0<<DDB7) | (0<<DDB6) | (0<<DDB5) | (0<<DDB4) | (1<<DDB3) | (1<<DDB2) | (1<<DDB1) | (1<<DDB0);
+// State: Bit7=T Bit6=T Bit5=T Bit4=T Bit3=0 Bit2=0 Bit1=0 Bit0=0 
+PORTB=(0<<PORTB7) | (0<<PORTB6) | (0<<PORTB5) | (0<<PORTB4) | (0<<PORTB3) | (0<<PORTB2) | (0<<PORTB1) | (0<<PORTB0);
+
+// Port C initialization
+// Function: Bit7=In Bit6=In Bit5=In Bit4=In Bit3=Out Bit2=Out Bit1=Out Bit0=In 
+DDRC=(0<<DDC7) | (0<<DDC6) | (0<<DDC5) | (0<<DDC4) | (1<<DDC3) | (1<<DDC2) | (1<<DDC1) | (0<<DDC0);
+// State: Bit7=T Bit6=T Bit5=T Bit4=T Bit3=0 Bit2=0 Bit1=0 Bit0=T 
+PORTC=(0<<PORTC7) | (0<<PORTC6) | (0<<PORTC5) | (0<<PORTC4) | (0<<PORTC3) | (0<<PORTC2) | (0<<PORTC1) | (0<<PORTC0);
+
+// Port D initialization
+// Function: Bit7=In Bit6=In Bit5=In Bit4=In Bit3=In Bit2=In Bit1=In Bit0=In 
+DDRD=(0<<DDD7) | (0<<DDD6) | (0<<DDD5) | (0<<DDD4) | (0<<DDD3) | (0<<DDD2) | (0<<DDD1) | (0<<DDD0);
+//DDRD = 0xff;
+// State: Bit7=T Bit6=T Bit5=T Bit4=T Bit3=P Bit2=P Bit1=P Bit0=P 
+PORTD=(0<<PORTD7) | (0<<PORTD6) | (0<<PORTD5) | (0<<PORTD4) | (1<<PORTD3) | (1<<PORTD2) | (1<<PORTD1) | (1<<PORTD0);
+
+
+while (1)
+      {
+      if (start == 0 ){
+        if ((PIND&0x0F) != 0x0F){
+            GET_KEY();
+        }
+        display(8);
+            
+      }else
+        display(1);
+      }
+}

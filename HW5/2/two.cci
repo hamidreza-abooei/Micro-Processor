@@ -1,0 +1,10 @@
+VERSION:3 SOURCE_TIMESTAMP:54A76054
+NODE:I LEVEL:0 LINE:7 "C:\cvavr\inc\mega32.h"
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\delay.h"
+NODE:V LEVEL:0 LINE:11 "state -> R5"
+NODE:V LEVEL:0 LINE:12 "number -> R4"
+NODE:F LEVEL:0 LINE:15 "show_number(void)"
+NODE:F LEVEL:0 LINE:20 "int_interrupt0(void)"
+NODE:F LEVEL:0 LINE:36 "int_timer1_COMPA(void)"
+NODE:F LEVEL:0 LINE:46 "main(void)"

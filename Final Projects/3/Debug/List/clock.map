@@ -1,0 +1,28 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+tic                                                                               R5           1
+hour                                                                              R4           1
+min                                                                               R7           1
+sec                                                                               R6           1
+temp                                                                              R9           1
+start                                                                             R8           1
+i                                                                                 R11          1
+key_pressed                                                                       R10          1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+display                                                                           0x00063     41
+timer2_ovf_isr                                                                    0x0008C     24
+send_number                                                                       0x000A4     41
+GET_KEY                                                                           0x000CD    110
+main                                                                              0x0013B     28

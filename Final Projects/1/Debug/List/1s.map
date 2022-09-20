@@ -1,0 +1,24 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+waiting                                                                           0x0260       8
+fname                                                                             0x0268      10
+lname                                                                             0x0272       7
+wrong                                                                             0x0279       6
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+i                                                                                 R4,R5        2
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+lcd_data                                                                          0x00078     15
+lcd_init                                                                          0x00087      9
+spi_isr                                                                           0x00090     67
+main                                                                              0x000D3     40

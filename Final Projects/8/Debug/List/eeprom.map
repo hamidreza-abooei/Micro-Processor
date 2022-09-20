@@ -1,0 +1,39 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+str_id                                                                            0x0268       9
+str_age                                                                           0x0271      10
+str_HR                                                                            0x027B      11
+temp                                                                              0x0286       3
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+counter                                                                           R5           1
+sec                                                                               R4           1
+read_heart                                                                        R7           1
+HR                                                                                R6           1
+AGE                                                                               R9           1
+ID                                                                                R8           1
+state                                                                             R11          1
+i                                                                                 R10          1
+flag                                                                              R13          1
+key_pressed                                                                       R12          1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+EEPROM_write                                                                      0x00081     13
+EEPROM_read                                                                       0x0008E     11
+show_msg                                                                          0x00099     18
+show_number                                                                       0x000AB     53
+ext_int0_isr                                                                      0x000E0     11
+ext_int1_isr                                                                      0x000EB     25
+timer1_ovf_isr                                                                    0x00104     40
+send_number                                                                       0x0012C    111
+GET_KEY                                                                           0x0019B     98
+main                                                                              0x001FD     48

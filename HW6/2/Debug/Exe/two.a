@@ -1,0 +1,199 @@
+;/*******************************************************
+;This program was created by the
+;CodeWizardAVR V3.12 Advanced
+;Automatic Program Generator
+;© Copyright 1998-2014 Pavel Haiduc, HP InfoTech s.r.l.
+;http://www.hpinfotech.com
+;
+;Project : HW6-2
+;Version :
+;Date    : 6/1/2022
+;Author  : Hamidreza Abooei
+;Company :
+;Comments:
+;
+;
+;Chip type               : ATmega32
+;Program type            : Application
+;AVR Core Clock frequency: 1.000000 MHz
+;Memory model            : Small
+;External RAM size       : 0
+;Data Stack size         : 512
+;*******************************************************/
+;
+;#include <mega32.h>
+;PCODE: $00000000 VOL: 0
+	#ifndef __SLEEP_DEFINED__
+;PCODE: $00000001 VOL: 0
+	#define __SLEEP_DEFINED__
+;PCODE: $00000002 VOL: 0
+	.EQU __se_bit=0x80
+;PCODE: $00000003 VOL: 0
+	.EQU __sm_mask=0x70
+;PCODE: $00000004 VOL: 0
+	.EQU __sm_powerdown=0x20
+;PCODE: $00000005 VOL: 0
+	.EQU __sm_powersave=0x30
+;PCODE: $00000006 VOL: 0
+	.EQU __sm_standby=0x60
+;PCODE: $00000007 VOL: 0
+	.EQU __sm_ext_standby=0x70
+;PCODE: $00000008 VOL: 0
+	.EQU __sm_adc_noise_red=0x10
+;PCODE: $00000009 VOL: 0
+	.SET power_ctrl_reg=mcucr
+;PCODE: $0000000A VOL: 0
+	#endif
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;
+;// Declare your global variables here
+;
+;#define DATA_REGISTER_EMPTY (1<<UDRE)
+;#define RX_COMPLETE (1<<RXC)
+;#define FRAMING_ERROR (1<<FE)
+;#define PARITY_ERROR (1<<UPE)
+;#define DATA_OVERRUN (1<<DOR)
+;
+;
+;// This flag is set on USART Receiver buffer overflow
+;//bit rx_buffer_overflow;
+;
+;// USART Receiver interrupt service routine
+;interrupt [USART_RXC] void usart_rx_isr(void)
+; 0000 0028 {
+
+	.CSEG
+;PCODE: $0000000D VOL: 0
+;PCODE: $0000000E VOL: 0
+; 0000 0029 char status,data;
+; 0000 002A status=UCSRA;
+;PCODE: $0000000F VOL: 0
+;PCODE: $00000010 VOL: 0
+;	status -> R17
+;	data -> R16
+;PCODE: $00000011 VOL: 0
+;PCODE: $00000012 VOL: 0
+; 0000 002B data=UDR;
+;PCODE: $00000013 VOL: 0
+;PCODE: $00000014 VOL: 0
+; 0000 002C if ((status & (FRAMING_ERROR | PARITY_ERROR | DATA_OVERRUN))==0)
+;PCODE: $00000015 VOL: 0
+;PCODE: $00000016 VOL: 0
+;PCODE: $00000017 VOL: 0
+; 0000 002D    {
+; 0000 002E         //data acknowledgement completed
+; 0000 002F         // Check for data between a => z
+; 0000 0030         if ((data >= 'a') && (data <= 'z')){
+;PCODE: $00000018 VOL: 0
+;PCODE: $00000019 VOL: 0
+;PCODE: $0000001A VOL: 0
+;PCODE: $0000001B VOL: 0
+;PCODE: $0000001C VOL: 0
+;PCODE: $0000001D VOL: 0
+;PCODE: $0000001E VOL: 0
+;PCODE: $0000001F VOL: 0
+;PCODE: $00000020 VOL: 0
+;PCODE: $00000021 VOL: 0
+; 0000 0031             data = data - ('a'-'A') ;
+;PCODE: $00000022 VOL: 0
+;PCODE: $00000023 VOL: 0
+; 0000 0032             UDR = data;
+;PCODE: $00000024 VOL: 0
+;PCODE: $00000025 VOL: 0
+; 0000 0033         }
+; 0000 0034 
+; 0000 0035    }
+;PCODE: $00000026 VOL: 0
+; 0000 0036 }
+;PCODE: $00000027 VOL: 0
+;PCODE: $00000028 VOL: 0
+;PCODE: $00000029 VOL: 0
+;PCODE: $0000002A VOL: 0
+;PCODE: $0000002B VOL: 0
+;
+;//#ifndef _DEBUG_TERMINAL_IO_
+;//// Get a character from the USART Receiver buffer
+;//#define _ALTERNATE_GETCHAR_
+;//#pragma used+
+;//char getchar(void)
+;//{
+;//char data;
+;//while (rx_counter==0);
+;//data=rx_buffer[rx_rd_index++];
+;//#if RX_BUFFER_SIZE != 256
+;//if (rx_rd_index == RX_BUFFER_SIZE) rx_rd_index=0;
+;//#endif
+;//#asm("cli")
+;//--rx_counter;
+;//#asm("sei")
+;//return data;
+;//}
+;//#pragma used-
+;//#endif
+;
+;
+;
+;
+;
+;
+;
+;// Standard Input/Output functions
+;#include <stdio.h>
+;
+;void main(void)
+; 0000 0056 {
+;PCODE: $0000002C VOL: 0
+; 0000 0057 // USART initialization
+; 0000 0058 // Communication Parameters: 8 Data, 1 Stop, No Parity
+; 0000 0059 // USART Receiver: On
+; 0000 005A // USART Transmitter: On
+; 0000 005B // USART Mode: Asynchronous
+; 0000 005C // USART Baud Rate: 4800
+; 0000 005D UCSRA=(0<<RXC) | (0<<TXC) | (0<<UDRE) | (0<<FE) | (0<<DOR) | (0<<UPE) | (0<<U2X) | (0<<MPCM);
+;PCODE: $0000002D VOL: 0
+;PCODE: $0000002E VOL: 0
+; 0000 005E UCSRB=(1<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (1<<RXEN) | (1<<TXEN) | (0<<UCSZ2) | (0<<RXB8) | (0<<TXB8);
+;PCODE: $0000002F VOL: 0
+;PCODE: $00000030 VOL: 0
+; 0000 005F UCSRC=(1<<URSEL) | (0<<UMSEL) | (0<<UPM1) | (0<<UPM0) | (0<<USBS) | (1<<UCSZ1) | (1<<UCSZ0) | (0<<UCPOL);
+;PCODE: $00000031 VOL: 0
+;PCODE: $00000032 VOL: 0
+; 0000 0060 UBRRH=0x00;
+;PCODE: $00000033 VOL: 0
+;PCODE: $00000034 VOL: 0
+; 0000 0061 UBRRL=0x0C;
+;PCODE: $00000035 VOL: 0
+;PCODE: $00000036 VOL: 0
+; 0000 0062 
+; 0000 0063 
+; 0000 0064 // Analog Comparator initialization
+; 0000 0065 // Analog Comparator: Off
+; 0000 0066 // The Analog Comparator's positive input is
+; 0000 0067 // connected to the AIN0 pin
+; 0000 0068 // The Analog Comparator's negative input is
+; 0000 0069 // connected to the AIN1 pin
+; 0000 006A ACSR=(1<<ACD) | (0<<ACBG) | (0<<ACO) | (0<<ACI) | (0<<ACIE) | (0<<ACIC) | (0<<ACIS1) | (0<<ACIS0);
+;PCODE: $00000037 VOL: 0
+;PCODE: $00000038 VOL: 0
+; 0000 006B SFIOR=(0<<ACME);
+;PCODE: $00000039 VOL: 0
+;PCODE: $0000003A VOL: 0
+; 0000 006C 
+; 0000 006D // Global enable interrupts
+; 0000 006E #asm("sei")
+;PCODE: $0000003B VOL: 0
+	sei
+;PCODE: $0000003C VOL: 0
+; 0000 006F 
+; 0000 0070 while (1)
+;PCODE: $0000003D VOL: 0
+; 0000 0071       {
+; 0000 0072 
+; 0000 0073       }
+;PCODE: $0000003E VOL: 0
+;PCODE: $0000003F VOL: 0
+; 0000 0074 }
+;PCODE: $00000040 VOL: 0
+;PCODE: $00000041 VOL: 0
+;PCODE: $00000042 VOL: 0

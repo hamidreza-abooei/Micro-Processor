@@ -1,0 +1,23 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+temp                                                                              0x0260       4
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+thigh                                                                             R5           1
+tlow                                                                              R4           1
+adc_select                                                                        R7           1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+display                                                                           0x0005C     37
+ADC_run                                                                           0x00081     39
+GET_KEY                                                                           0x000A8     99
+main                                                                              0x0010B     24

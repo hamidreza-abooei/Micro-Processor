@@ -1,0 +1,7 @@
+VERSION:3 SOURCE_TIMESTAMP:54DE9111
+NODE:I LEVEL:0 LINE:24 "C:\cvavr\inc\mega32.h"
+NODE:V LEVEL:0 LINE:27 "counter -> R5"
+NODE:V LEVEL:0 LINE:28 "flag -> R4"
+NODE:F LEVEL:0 LINE:30 "timer2_ovf_isr(void)"
+NODE:F LEVEL:0 LINE:54 "ana_comp_isr(void)"
+NODE:F LEVEL:0 LINE:60 "main(void)"

@@ -1,0 +1,9 @@
+VERSION:3 SOURCE_TIMESTAMP:54D6094C
+NODE:I LEVEL:0 LINE:1 "C:\cvavr\inc\mega32.h"
+NODE:V LEVEL:0 LINE:3 "weight -> R5"
+NODE:V LEVEL:0 LINE:3 "whigh -> R4"
+NODE:V LEVEL:0 LINE:3 "wlow -> R7"
+NODE:V LEVEL:0 LINE:4 "temp -> R8,R9"
+NODE:F LEVEL:0 LINE:8 "display(void)"
+NODE:F LEVEL:0 LINE:16 "ADC_isr(void)"
+NODE:F LEVEL:0 LINE:31 "main(void)"

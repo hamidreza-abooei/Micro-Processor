@@ -1,0 +1,30 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+temp                                                                              0x0260      16
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+key_pressed                                                                       R5           1
+value1                                                                            R6,R7        2
+value2                                                                            R8,R9        2
+command_pressed                                                                   R4           1
+command                                                                           R11          1
+i                                                                                 R10          1
+counter                                                                           R13          1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+lcd_command                                                                       0x00060      6
+lcd_data                                                                          0x00066      6
+lcd_clear                                                                         0x00072      3
+lcd_write_number                                                                  0x00075     61
+calculator                                                                        0x000B2    102
+GET_KEY                                                                           0x00118    125
+main                                                                              0x00195     27

@@ -1,0 +1,13 @@
+VERSION:3 SOURCE_TIMESTAMP:54DE264E
+NODE:I LEVEL:0 LINE:24 "C:\cvavr\inc\mega32.h"
+NODE:I LEVEL:0 LINE:26 "C:\cvavr\inc\delay.h"
+NODE:M LEVEL:0 LINE:28 "ADC_VREF_TYPE"
+NODE:V LEVEL:0 LINE:30 "data -> R4,R5"
+NODE:V LEVEL:0 LINE:30 "data1 -> R6,R7"
+NODE:V LEVEL:0 LINE:31 "res -> RAM:????"
+NODE:V LEVEL:0 LINE:32 "outl -> R9"
+NODE:V LEVEL:0 LINE:32 "outh -> R8"
+NODE:V LEVEL:0 LINE:33 "temp -> R11"
+NODE:C LEVEL:0 LINE:34 "seven -> FLASH"
+NODE:F LEVEL:0 LINE:38 "show(unsigned char outh,unsigned char outl)"
+NODE:F LEVEL:0 LINE:84 "main(void)"

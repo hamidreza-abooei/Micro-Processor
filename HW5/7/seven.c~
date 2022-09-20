@@ -1,0 +1,65 @@
+/*
+ * seven.c
+ *
+ * Created: 5/8/2022 10:32:29 PM
+ * Author: Hamidreza
+ */
+
+#include <mega32.h>
+#include <io.h>
+#include <delay.h>
+
+unsigned char number = 0;   //Number that counts
+unsigned char flag = 0;
+
+void show_number(void){
+    PORTA = number / 10;
+    PORTC = number % 10;
+}
+
+interrupt [2] void int_interrupt0 (void){
+
+    number = 0;
+    TCNT1 = 0;                    
+    TCCR1B = 0B00001101;  
+    //TIMSK = 0B00010000;
+    show_number();
+        
+}
+
+interrupt [8] void int_timer1_COMPA (void){
+    TCCR1B = 0B00001000;
+    show_number();
+}
+
+
+void main(void)
+{
+    DDRA = 0B00001111;
+    DDRC = 0B00001111;
+    DDRD = 0X00;
+    PORTD = 0B01000100; //PULL-UP
+    MCUCR = 0B00000010;
+    GICR = 0B01000000;
+    OCR1A = 58593;        //In order to reach 60 sec delay    60000000 / 1024 = 58593
+    TCCR1A = 0B00000000;
+    TCCR1B = 0B00001000;  
+    TIMSK = 0B00010000;
+    
+    
+    #asm("SEI")
+    show_number();
+
+    while (1)
+    {
+        if(PORTD.6 == 1){
+            if (flag == 0){
+                number++;
+                flag = 1;
+            }
+        }else{
+            flag =0;
+        }
+             
+    }
+}
